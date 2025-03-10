@@ -19,7 +19,7 @@ public class RockInteract : MonoBehaviour
         originalParent = transform.parent; 
         rb.isKinematic = true; 
     }
-
+    // Left Click to pick up rock
     public void PickUp(Transform playerCamera)
     {
         if (!isPickedUp)
