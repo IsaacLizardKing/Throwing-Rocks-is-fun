@@ -14,9 +14,13 @@ public class TargetCollision : MonoBehaviour
 
     }
 
-
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Target Hit: " + other.name);
+        Debug.Log("Target Hit: " + collision.gameObject.name);
     }
+
+    // void onCollision
+    // {
+    //     Debug.Log("Target Hit: " + other.name);
+    // }
 }

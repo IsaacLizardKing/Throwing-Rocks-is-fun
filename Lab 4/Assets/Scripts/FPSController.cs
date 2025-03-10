@@ -70,9 +70,19 @@ public class FPSController : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("e was pressed!");
+            interact();
+        }
+    }
+    void interact()
+    {
         RaycastHit hit;
+
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionRange))
         {
+            Debug.Log("raycast: " + hit.collider.gameObject.name);
             RockInteract rock = hit.collider.GetComponent<RockInteract>();
             if (rock != null)
             {
@@ -80,7 +90,7 @@ public class FPSController : MonoBehaviour
 
                 Debug.Log("Rock in range!");
 
-                if (Input.GetMouseButtonDown(0))
+                if (true)
                 {
                     if (isHoldingRock)
                     {
