@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: -0.753
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585545}
+  playerHand: {fileID: 0}
   walkSpeed: 6
   runSpeed: 12
   jumpPower: 7
@@ -393,6 +394,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   canMove: 1
+  interactionRange: 3
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: -0.753
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -853,11 +855,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.414
+      value: 4.448
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.535
+      value: -0.753
       objectReference: {fileID: 0}
     - target: {fileID: 5965334782575778770, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
       propertyPath: m_LocalPosition.z
