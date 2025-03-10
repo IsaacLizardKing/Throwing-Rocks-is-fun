@@ -1,52 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 [RequireComponent(typeof(CharacterController))]
-public class FPSController  : MonoBehaviour
+public class FPSController : MonoBehaviour
 {
     public Camera playerCamera;
+    public Transform playerHand; // Optional: can be useful for later implementation
+
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
- 
- 
+
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
- 
- 
+
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
- 
+
     public bool canMove = true;
- 
-    
+
     CharacterController characterController;
+
+    public float interactionRange = 3f;
+    private RockInteract currentRock;
+    private bool isHoldingRock = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
- 
+
     void Update()
     {
- 
-        #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
- 
+
         // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
- 
-        #endregion
- 
-        #region Handles Jumping
+
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
@@ -55,17 +54,14 @@ public class FPSController  : MonoBehaviour
         {
             moveDirection.y = movementDirectionY;
         }
- 
+
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
- 
-        #endregion
- 
-        #region Handles Rotation
+
         characterController.Move(moveDirection * Time.deltaTime);
- 
+
         if (canMove)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
@@ -73,7 +69,41 @@ public class FPSController  : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
- 
-        #endregion
+
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionRange))
+        {
+            RockInteract rock = hit.collider.GetComponent<RockInteract>();
+            if (rock != null)
+            {
+                currentRock = rock;
+
+                Debug.Log("Rock in range!");
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (isHoldingRock)
+                    {
+                        Vector3 throwDirection = playerCamera.transform.forward;
+                        currentRock.Throw(throwDirection);
+                        isHoldingRock = false;
+                    }
+                    else
+                    {
+                        currentRock.PickUp(playerCamera.transform);
+                        isHoldingRock = true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            currentRock = null;
+        }
+
+        if (isHoldingRock && currentRock != null)
+        {
+            currentRock.UpdateHeldPosition(playerCamera.transform.position, playerCamera.transform.rotation);
+        }
     }
 }
