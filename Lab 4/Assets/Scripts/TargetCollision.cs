@@ -26,7 +26,7 @@ public class TargetCollision : MonoBehaviour
 
     private void spawnParticles()
     {
-        particlesInstance = Instantiate(particles);
+        particlesInstance = Instantiate(particles, transform.position, Quaternion.LookRotation(transform.up, transform.up));
     }
 
 }
