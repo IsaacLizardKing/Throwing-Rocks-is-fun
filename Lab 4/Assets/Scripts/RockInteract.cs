@@ -6,18 +6,18 @@ public class RockInteract : MonoBehaviour
     private Rigidbody rb;
     private Transform originalParent;
 
-    
-    public float throwForce = 10f;
+
+    public float throwForce = 100f;
     private Vector3 throwDirection;
 
-    
-    public Vector3 heldPositionOffset = new Vector3(0, 0, 2); 
+
+    public Vector3 heldPositionOffset = new Vector3(0, 0, 2);
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        originalParent = transform.parent; 
-        rb.isKinematic = true; 
+        originalParent = transform.parent;
+        rb.isKinematic = true;
     }
     // Left Click to pick up rock
     public void PickUp(Transform playerCamera)
@@ -29,7 +29,7 @@ public class RockInteract : MonoBehaviour
 
             // Rock follows camera
             transform.SetParent(playerCamera);
-            rb.isKinematic = true; 
+            rb.isKinematic = true;
         }
     }
 
@@ -38,7 +38,7 @@ public class RockInteract : MonoBehaviour
         if (isPickedUp)
         {
             transform.position = cameraPosition + cameraRotation * heldPositionOffset;
-            transform.rotation = cameraRotation; 
+            transform.rotation = cameraRotation;
         }
     }
 
@@ -51,8 +51,8 @@ public class RockInteract : MonoBehaviour
             Debug.Log("Rock thrown!");
 
             transform.SetParent(originalParent);
-            rb.isKinematic = false; 
-            rb.AddForce(throwDirection * throwForce, ForceMode.VelocityChange); 
+            rb.isKinematic = false;
+            rb.AddForce(throwDirection * throwForce, ForceMode.VelocityChange);
 
             rb.linearVelocity = Vector3.zero;
         }

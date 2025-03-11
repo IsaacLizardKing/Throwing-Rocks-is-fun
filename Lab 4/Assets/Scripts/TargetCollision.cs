@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class TargetCollision : MonoBehaviour
 {
+
+    [SerializeField] private ParticleSystem particles;
+
+    private ParticleSystem particlesInstance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,9 +18,15 @@ public class TargetCollision : MonoBehaviour
 
     }
 
-
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Target Hit: " + other.name);
+        Debug.Log("Target Hit: " + collision.gameObject.name);
+        spawnParticles();
     }
+
+    private void spawnParticles()
+    {
+        particlesInstance = Instantiate(particles);
+    }
+
 }
