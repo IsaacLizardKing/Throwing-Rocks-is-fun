@@ -1615,6 +1615,7 @@ MonoBehaviour:
   dialogueText: {fileID: 422584294}
   nameText: {fileID: 532630840}
   dialoguePanel: {fileID: 1189558386}
+  npc: {fileID: 0}
 --- !u!4 &1752431745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d50089ee26360634190b2b035f6d5fff, type: 3}
@@ -2013,7 +2014,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 531b30735560e74429a75eea1c8ad0bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
