@@ -23,7 +23,7 @@ public class FPSController : MonoBehaviour
 
     CharacterController characterController;
 
-    public float interactionRange = 6f;
+    public float interactionRange = 10f;
     private RockInteract currentRock;
     private bool isHoldingRock = false;
     bool isRunning = false;
@@ -103,11 +103,13 @@ public class FPSController : MonoBehaviour
                         Vector3 throwDirection = playerCamera.transform.forward;
                         currentRock.Throw(throwDirection);
                         isHoldingRock = false;
+                        // throwSource.Play();
                     }
                     else
                     {
                         currentRock.PickUp(playerCamera.transform);
                         isHoldingRock = true;
+                        // pickupSource.Play();
                     }
                 }
             }
