@@ -124,6 +124,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public void moveNPCtoSpot(GameObject npc, Transform position)
+    {
+        Debug.Log("GameManager move to spot");
+        npc.GetComponent<NPCMove>().moveToSpot(position);
+    }
 
     // public void eatCarrot(GameObject player, Animator animator, GameObject carrot)
     // {

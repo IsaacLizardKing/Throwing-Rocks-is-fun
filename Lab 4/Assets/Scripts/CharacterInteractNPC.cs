@@ -8,6 +8,7 @@ public class CharacterInteractNPC : MonoBehaviour
 
     private float interactDistance = 2.0f;
     bool inConversation;
+    public GameObject npc;
     // private Animator animator;
 
     // private PlayerMovement player;
@@ -23,6 +24,12 @@ public class CharacterInteractNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Debug.Log("J was pressed");
+            GameManager.Instance.moveNPCtoSpot(npc, transform);
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Player Interact E was pressed");
@@ -52,9 +59,7 @@ public class CharacterInteractNPC : MonoBehaviour
                     if (npc_interact_hit.collider.gameObject.name.Contains("NPC"))
                     {
                         GameObject character = npc_interact_hit.collider.gameObject;
-                        Vector3 rot = Quaternion.LookRotation(transform.position - character.transform.position).eulerAngles;
-                        rot.x = rot.z = 0;
-                        character.transform.rotation = Quaternion.Euler(rot);
+                        character.GetComponent<NPCMove>().turnTowardsPlayer(transform);
                         print("Hit NPC");
                         GameManager.Instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName, 2);
                     }
