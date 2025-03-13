@@ -4,12 +4,15 @@ public class TargetCollision : MonoBehaviour
 {
 
     [SerializeField] private ParticleSystem particles;
+    public GameObject NPC;
+    private NPCMove npcMove;
+    public GameObject player;
 
     private ParticleSystem particlesInstance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        npcMove = NPC.GetComponent<NPCMove>();
     }
 
     // Update is called once per frame
@@ -22,6 +25,7 @@ public class TargetCollision : MonoBehaviour
     {
         Debug.Log("Target Hit: " + collision.gameObject.name);
         spawnParticles();
+        npcMove.moveToSpot(player.transform);
     }
 
     private void spawnParticles()

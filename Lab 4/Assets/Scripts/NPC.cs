@@ -8,23 +8,33 @@ public class NPC : MonoBehaviour
 
     public string npcName;
     public DialogueAsset dialogueAsset;
+    private int position = 0;
 
-    [HideInInspector]
-    public int StartPosition
+    public int getPosition()
     {
-        get
-        {
-            if (firstInteraction)
-            {
-                firstInteraction = false;
-                return 0;
-            }
-            else
-            {
-                return repeatStartPosition;
-            }
-        }
+        return position;
     }
+
+    public void incPosition()
+    {
+        position += 1;
+    }
+    // [HideInInspector]
+    // public int StartPosition
+    // {
+    //     get
+    //     {
+    //         if (firstInteraction)
+    //         {
+    //             firstInteraction = false;
+    //             return 0;
+    //         }
+    //         else
+    //         {
+    //             return repeatStartPosition;
+    //         }
+    //     }
+    // }
 
     internal static void Destroy()
     {
