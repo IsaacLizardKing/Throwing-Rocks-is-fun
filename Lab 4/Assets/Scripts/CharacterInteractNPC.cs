@@ -61,7 +61,9 @@ public class CharacterInteractNPC : MonoBehaviour
                         GameObject character = npc_interact_hit.collider.gameObject;
                         character.GetComponent<NPCMove>().turnTowardsPlayer(transform);
                         print("Hit NPC");
-                        GameManager.Instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName, 2);
+                        int p = npc.getPosition();
+                        GameManager.Instance.StartDialogue(npc.dialogueAsset.dialogue, p, npc.npcName, 2);
+                        npc.incPosition();
                     }
                 }
             }
