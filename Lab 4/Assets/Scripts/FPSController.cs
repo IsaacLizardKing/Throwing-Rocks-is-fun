@@ -23,9 +23,14 @@ public class FPSController : MonoBehaviour
 
     CharacterController characterController;
 
-    public float interactionRange = 3f;
+    public float interactionRange = 6f;
     private RockInteract currentRock;
     private bool isHoldingRock = false;
+    bool isRunning = false;
+
+    [Header("Animations")]
+    [SerializeField]
+    private Animator _animator;
 
     void Start()
     {
@@ -39,21 +44,19 @@ public class FPSController : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Press Left Shift to run
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
-        {
-            moveDirection.y = jumpPower;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
+        // if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        // {
+        //     moveDirection.y = jumpPower;
+        // }
+        // else
+        // {
+        // moveDirection.y = movementDirectionY;
+        // }
 
         if (!characterController.isGrounded)
         {
@@ -61,6 +64,9 @@ public class FPSController : MonoBehaviour
         }
 
         characterController.Move(moveDirection * Time.deltaTime);
+
+        float forwardValue = new Vector3(curSpeedX, 0, curSpeedY).magnitude;
+        _animator.SetFloat("forward", forwardValue);
 
         if (canMove)
         {
