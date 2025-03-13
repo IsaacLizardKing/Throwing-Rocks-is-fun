@@ -51,6 +51,10 @@ public class CharacterInteractNPC : MonoBehaviour
                     Debug.Log("Hit something (NPC)");
                     if (npc_interact_hit.collider.gameObject.name.Contains("NPC"))
                     {
+                        GameObject character = npc_interact_hit.collider.gameObject;
+                        Vector3 rot = Quaternion.LookRotation(transform.position - character.transform.position).eulerAngles;
+                        rot.x = rot.z = 0;
+                        character.transform.rotation = Quaternion.Euler(rot);
                         print("Hit NPC");
                         GameManager.Instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName, 2);
                     }
