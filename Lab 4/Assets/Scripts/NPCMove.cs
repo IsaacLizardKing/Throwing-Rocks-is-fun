@@ -54,6 +54,7 @@ public class NPCMove : MonoBehaviour
         {
             Debug.Log("HIT Player!");
             isMoving = false;
+            animator.SetBool("isMoving", false);
         }
     }
 
