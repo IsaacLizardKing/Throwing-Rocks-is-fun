@@ -6,7 +6,7 @@ using UnityEngine;
 public class FPSController : MonoBehaviour
 {
     public Camera playerCamera;
-    public Transform playerHand; // Optional: can be useful for later implementation
+    public Transform playerHand;
 
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
@@ -27,6 +27,10 @@ public class FPSController : MonoBehaviour
     private RockInteract currentRock;
     private bool isHoldingRock = false;
     bool isRunning = false;
+
+    public AudioSource walkSource;
+    public AudioSource pickupSource;
+    public AudioSource throwSource;
 
     [Header("Animations")]
     [SerializeField]
@@ -68,6 +72,16 @@ public class FPSController : MonoBehaviour
         float forwardValue = new Vector3(curSpeedX, 0, curSpeedY).magnitude;
         _animator.SetFloat("forward", forwardValue);
 
+        if (forwardValue > 0f && !walkSource.isPlaying)
+        {
+        walkSource.Play();  
+        }
+    
+        else if (forwardValue <= 0f && walkSource.isPlaying)
+        {
+        walkSource.Stop();  
+        }
+
         if (canMove)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
@@ -103,13 +117,13 @@ public class FPSController : MonoBehaviour
                         Vector3 throwDirection = playerCamera.transform.forward;
                         currentRock.Throw(throwDirection);
                         isHoldingRock = false;
-                        // throwSource.Play();
+                        throwSource.Play();
                     }
                     else
                     {
                         currentRock.PickUp(playerCamera.transform);
                         isHoldingRock = true;
-                        // pickupSource.Play();
+                        pickupSource.Play();
                     }
                 }
             }
