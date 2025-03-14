@@ -150,5 +150,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPickedUp: 0
-  throwForce: 15
+  throwForce: 20
   heldPositionOffset: {x: 0, y: 0, z: 2}
