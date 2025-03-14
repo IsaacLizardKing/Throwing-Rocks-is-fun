@@ -27,7 +27,7 @@ public class CharacterInteractNPC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             Debug.Log("J was pressed");
-            GameManager.Instance.moveNPCtoSpot(npc, transform);
+            GameManager.Instance.moveNPCtoSpot();
         }
 
         if (Input.GetKeyDown(KeyCode.E))

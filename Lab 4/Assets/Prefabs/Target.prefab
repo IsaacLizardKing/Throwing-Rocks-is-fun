@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3786753414010814236}
   - component: {fileID: 5521405869960638958}
   - component: {fileID: 5553008351042837837}
+  - component: {fileID: 746987855525759540}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -122,3 +123,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 6516083788383572828, guid: 137a9b1805581124bb60a4f6e9076246, type: 3}
+  NPC: {fileID: 7943989671185568277, guid: 0eba46e4976e3314c96025068257cbef, type: 3}
+  player: {fileID: 1674813120405534788, guid: e6ba91f4c005608419bcb71a17671de8, type: 3}
+--- !u!114 &746987855525759540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500128240299428844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39da5f353e1553244a7b22c9477bda5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1

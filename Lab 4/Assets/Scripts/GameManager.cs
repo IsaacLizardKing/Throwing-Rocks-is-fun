@@ -3,6 +3,7 @@ using TMPro;
 using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
     public GameObject npc;
+    public GameObject player;
     bool skipLineTriggered;
 
     public void StartDialogue(string[] dialogue, int startPosition, string name, int stopPosition)
@@ -140,10 +142,37 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void moveNPCtoSpot(GameObject npc, Transform position)
+    public void moveNPCtoSpot()
     {
         Debug.Log("GameManager move to spot");
-        npc.GetComponent<NPCMove>().moveToSpot(position);
+        npc.GetComponent<NPCMove>().moveToSpot(player.transform);
+    }
+    public GameObject target;
+    public void targetHit(GameObject target)
+    {
+        moveNPCtoSpot();
+        Destroy(target);
+        spawnTarget();
+    }
+    public void spawnTarget()
+    {
+        // pick a random point
+        Vector3 p1 = new Vector3(15, 12, -15);
+        Vector3 p2 = new Vector3(15, 8, -20);
+        Vector3 p3 = new Vector3(15, 6, -20);
+        Vector3 p4 = new Vector3(15, 12, -15);
+        Vector3 p5 = new Vector3(15, 1, -12);
+
+        List<Vector3> lst = new List<Vector3>
+        {
+            p1,
+            p2,
+            p3,
+            p4
+        };
+        int i = UnityEngine.Random.Range(0, 3);
+        // spawn target
+        Instantiate(target, lst[i], Quaternion.identity);
     }
 
     // public void eatCarrot(GameObject player, Animator animator, GameObject carrot)
