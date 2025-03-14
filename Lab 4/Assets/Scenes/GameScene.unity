@@ -2105,7 +2105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1189558387
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2759,7 +2759,9 @@ MonoBehaviour:
   dialogueText: {fileID: 422584294}
   nameText: {fileID: 532630840}
   dialoguePanel: {fileID: 1189558386}
-  npc: {fileID: 0}
+  npc: {fileID: 7943989671185568277, guid: 0eba46e4976e3314c96025068257cbef, type: 3}
+  player: {fileID: 1674813120405534788, guid: e6ba91f4c005608419bcb71a17671de8, type: 3}
+  target: {fileID: 1500128240299428844, guid: 90338f59a8fe87649abf6beeb16d8ae3, type: 3}
 --- !u!4 &1752431745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d50089ee26360634190b2b035f6d5fff, type: 3}
