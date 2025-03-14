@@ -27,6 +27,7 @@ public class TargetCollision : MonoBehaviour
         spawnParticles();
         GameManager.Instance.targetHit(gameObject);
         npcMove.moveToSpot(player.transform);
+        GameManager.Instance.IncScore(1);
     }
 
     private void spawnParticles()

@@ -33,6 +33,15 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     bool skipLineTriggered;
 
+    int Score = 0;
+    public TextMeshProUGUI ScoreText;
+
+    public void IncScore(int ds) {
+        Score += ds;
+        ScoreText.text = "Score: " + Score;
+    }
+
+
     public void StartDialogue(string[] dialogue, int startPosition, string name, int stopPosition)
     {
         Debug.Log("GameManager start dialog");
