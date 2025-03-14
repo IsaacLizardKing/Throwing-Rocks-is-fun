@@ -7,6 +7,7 @@ public class NPCMove : MonoBehaviour
     public float speed = 0.5f;
     private Transform goalPosition;
     private Animator animator;
+    private bool inConversation = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,6 +42,7 @@ public class NPCMove : MonoBehaviour
         turnTowardsPlayer(position);
         isMoving = true;
         goalPosition = position;
+        Debug.Log("movetospot called!");
     }
     public void turnTowardsPlayer(Transform playerTransform)
     {
@@ -50,12 +52,28 @@ public class NPCMove : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+
         if (collision.collider.gameObject.name == "Player")
         {
-            Debug.Log("HIT Player!");
-            isMoving = false;
-            animator.SetBool("isMoving", false);
+            if (!inConversation)
+            {
+                inConversation = true;
+                Debug.Log("HIT Player!");
+                isMoving = false;
+                animator.SetBool("isMoving", false);
+                NPC npc = GetComponent<NPC>();
+                print("Hit NPC");
+                int p = npc.getPosition();
+                GameManager.Instance.StartDialogue(npc.dialogueAsset.dialogue, p, npc.npcName, 2);
+                npc.incPosition();
+            }
         }
     }
+
+    public void leaveConversation()
+    {
+        inConversation = false;
+    }
+
 
 }

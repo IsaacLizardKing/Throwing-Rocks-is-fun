@@ -14,3 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Hey, this is a test dialog
+  - Why are you throwing rocks? You might as well just not
+  - Seriously, why would you throw all these rocks away?
+  - 'All right buddy, you seriously need to stop '
+  - Please stop, we are running out of rocks
+  - STOP THROWING ROCKS!!!
+  - STOP STOP STOP!!!
+  - These rocks are imortant! Stop throwing them!
+  - I am going to call the police!
+  - You are stealing all my rocks! They are all I have left in this world!
+  - You STUPID kid! Stop throwing rocks!

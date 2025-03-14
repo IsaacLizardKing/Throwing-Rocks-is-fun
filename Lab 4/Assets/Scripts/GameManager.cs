@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
+    public GameObject npc;
     bool skipLineTriggered;
 
     public void StartDialogue(string[] dialogue, int startPosition, string name, int stopPosition)
@@ -47,32 +48,45 @@ public class GameManager : MonoBehaviour
 
     }
 
-    IEnumerator RunDialogue(string[] dialogue, int startPosition, int stopPosition)
+    IEnumerator RunDialogue(string[] dialogue, int position, int stopPosition)
     {
         Debug.Log("Game Manager run dialog");
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
 
-        for (int i = startPosition; i < dialogue.Length; i++)
-        {
-            Debug.Log("dialog i: " + i);
-            Debug.Log("dialog length: " + dialogue.Length);
-            if (i == stopPosition)
-            {
-                Debug.Log("Stop Position Reached");
-                break;
-            }
-            //dialogueText.text = dialogue[i];
-            dialogueText.text = null;
-            StartCoroutine(TypeTextUncapped(dialogue[i]));
+        // for (int i = startPosition; i < dialogue.Length; i++)
+        // {
+        //     Debug.Log("dialog i: " + i);
+        //     Debug.Log("dialog length: " + dialogue.Length);
+        //     if (i == stopPosition)
+        //     {
+        //         Debug.Log("Stop Position Reached");
+        //         break;
+        //     }
+        //     //dialogueText.text = dialogue[i];
+        //     dialogueText.text = null;
+        //     StartCoroutine(TypeTextUncapped(dialogue[i]));
 
-            while (skipLineTriggered == false)
-            {
-                // Wait for the current line to be skipped
-                yield return null;
-            }
-            skipLineTriggered = false;
+        //     while (skipLineTriggered == false)
+        //     {
+        //         // Wait for the current line to be skipped
+        //         yield return null;
+        //     }
+        //     skipLineTriggered = false;
+        // }
+        dialogueText.text = dialogue[position];
+        dialogueText.text = null;
+        StartCoroutine(TypeTextUncapped(dialogue[position]));
+
+        while (skipLineTriggered == false)
+        {
+            // Wait for the current line to be skipped
+            yield return null;
         }
+        skipLineTriggered = false;
+
+        NPCMove npcMove = npc.GetComponent<NPCMove>();
+        npcMove.leaveConversation();
         Debug.Log("Dialog ended");
         OnDialogueEnded?.Invoke();
         dialoguePanel.SetActive(false);
@@ -92,6 +106,8 @@ public class GameManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        NPCMove npcMove = npc.GetComponent<NPCMove>();
+        npcMove.leaveConversation();
         nameText.text = null;
         dialogueText.text = null;
         dialoguePanel.SetActive(false);
