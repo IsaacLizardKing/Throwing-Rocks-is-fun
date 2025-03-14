@@ -25,6 +25,7 @@ public class TargetCollision : MonoBehaviour
     {
         Debug.Log("Target Hit: " + collision.gameObject.name);
         spawnParticles();
+        GameManager.Instance.targetHit(gameObject);
         npcMove.moveToSpot(player.transform);
     }
 
