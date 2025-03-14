@@ -7,10 +7,13 @@ using static Unity.Mathematics.math;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class TerrainChild : MonoBehaviour
 {
-    [SerializeField] int chunkSize = 64;
-    [SerializeField] int LODStepSize = 128;
+    public int chunkSize = 64;
+    public int LODStepSize = 128;
+    public int baseLOD = 0;
     public Vector3 cornerGoalz;
     public TerrainData terra;
+    public Vector3 sampleSpacing;
+    public Vector3 terraScale;
     private int LOD = 0;
     int LODscale;
     Camera mCamera;
@@ -68,21 +71,19 @@ public class TerrainChild : MonoBehaviour
             while(z < Zbound) {
                 float xPos = (x / ((float) (Xbound - 1))) * xDiff;
                 float zPos = (z / ((float) (Zbound - 1))) * zDiff;
-
                 verts[x * Xbound + z] = new Vector3(xPos, interpHeight(xPos, zPos), zPos);
                 z += 1;
-            } 
+            }
             x += 1;
         }
-
         return verts;
     }
     
     float interpHeight(float xPos, float zPos) {
-        float a = terra.GetHeight((int) ((transform.localPosition.x + xPos) / 2.34f), (int) ((transform.localPosition.z + zPos) / 2.34f));
-        float x = terra.GetHeight((int) ((transform.localPosition.x + xPos) / 2.34f + 1), (int) ((transform.localPosition.z + zPos) / 2.34f));
-        float z = terra.GetHeight((int) ((transform.localPosition.x + xPos) / 2.34f), (int) ((transform.localPosition.z + zPos) / 2.34f + 1));
-        float xz = terra.GetHeight((int) ((transform.localPosition.x + xPos) / 2.34f + 1), (int) ((transform.localPosition.z + zPos) / 2.34f + 1));
+        float a = terra.GetHeight((int) ((transform.localPosition.x + xPos) / sampleSpacing.x), (int) ((transform.localPosition.z + zPos) / sampleSpacing.z));
+        float x = terra.GetHeight((int) ((transform.localPosition.x + xPos) / sampleSpacing.x + 1), (int) ((transform.localPosition.z + zPos) / sampleSpacing.z));
+        float z = terra.GetHeight((int) ((transform.localPosition.x + xPos) / sampleSpacing.x), (int) ((transform.localPosition.z + zPos) / sampleSpacing.z + 1));
+        float xz = terra.GetHeight((int) ((transform.localPosition.x + xPos) / sampleSpacing.x + 1), (int) ((transform.localPosition.z + zPos) / sampleSpacing.z + 1));
         float aw = Mathf.Sqrt(Mathf.Pow(xPos - ((int) xPos), 2) + Mathf.Pow(zPos - ((int) zPos), 2));
         float xw = Mathf.Sqrt(Mathf.Pow(((int) (xPos + 1)) - xPos, 2) + Mathf.Pow(zPos - ((int) zPos), 2));
         float zw = Mathf.Sqrt(Mathf.Pow(xPos - ((int) xPos), 2) + Mathf.Pow(((int) (zPos + 1)) - zPos, 2));
@@ -142,7 +143,7 @@ public class TerrainChild : MonoBehaviour
                 float xPos = (x / ((float) (Xbound - 1))) * xDiff;
                 float zPos = (z / ((float) (Zbound - 1))) * zDiff;
 
-                uvs[x * Xbound + z] = new Vector2((transform.localPosition.x + xPos) / 1200, (transform.localPosition.z + zPos) / 1200);
+                uvs[x * Xbound + z] = new Vector2((transform.localPosition.x + xPos) / terraScale.x, (transform.localPosition.z + zPos) / terraScale.z);
                 z += 1;
             } 
             x += 1;
@@ -162,12 +163,12 @@ public class TerrainChild : MonoBehaviour
         var relativePos = tileCenter - camPos;
 
         
-        LOD = (int) Mathf.Sqrt(relativePos.x * relativePos.x + relativePos.y * relativePos.y + relativePos.z * relativePos.z) / LODStepSize;
+        LOD = (int) Mathf.Sqrt(relativePos.x * relativePos.x + relativePos.y * relativePos.y + relativePos.z * relativePos.z) / LODStepSize + baseLOD;
         if(Mathf.Pow(2, LOD) >= chunkSize) {
             LOD = (int) (Mathf.Log(chunkSize, 2) - 2);
         }
         if(mCamera.WorldToScreenPoint(tileCenter).z < -1) LOD -= 1;
-        if(LOD < 0) LOD = 0;
+        if(LOD < baseLOD) LOD = baseLOD;
     }
 
     // Update is called once per frame

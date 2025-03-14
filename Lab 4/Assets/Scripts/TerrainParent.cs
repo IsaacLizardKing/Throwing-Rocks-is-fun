@@ -7,6 +7,8 @@ public class TerrainParent : MonoBehaviour
     [SerializeField] GameObject tile;
     [SerializeField] int manhattanLoadDist = 128;
     [SerializeField] float screenLoadCushion = 0.1f;
+    [SerializeField] int LODStepSize = 128;
+    [SerializeField] int baseLOD = 0;
     GameObject[] tiles;
     Camera mCamera;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,7 +31,12 @@ public class TerrainParent : MonoBehaviour
                 tileInstance.transform.localPosition = new Vector3(x * chunkSize, 0, z * chunkSize);
                 TerrainChild a = tileInstance.GetComponent<TerrainChild>();
                 a.terra = terra;
+                a.sampleSpacing = terra.heightmapScale;
                 a.cornerGoalz = new Vector3((x + 1) * chunkSize, 0, (z + 1) * chunkSize);
+                a.terraScale = terra.size;
+                a.chunkSize = chunkSize;
+                a.LODStepSize = LODStepSize;
+                a.baseLOD = baseLOD;
                 tileInstance.SetActive(false);
                 tileInstance.SetActive(toLoadOrNot(tileInstance));
                 tiles[x * Xbound + z] = tileInstance;
