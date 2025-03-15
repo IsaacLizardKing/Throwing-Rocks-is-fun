@@ -11,7 +11,7 @@ Aesthetics: Meant to be a calm, semi-monotonous game.
 
 Joys: It felt good coding the rock throwing and picking up code and then seeing it function as I wanted.
 
-Struggles: 
+Struggles: Creating the terrain was difficult. Implementing the NPC movement to the player was a little tricky.
 
 Audio Assets:
 https://opengameart.org/content/chill-bgm 
@@ -27,7 +27,7 @@ https://www.poliigon.com/texture/flat-grass-texture/4585
 
 What Andrew Did: Andrew implemented the player movement, the rock picking up and throwing mechanics, the rock and grass textures, the player animations, SFX, invisible walls, the score system, and the backbone of the Title scene.
 
-What Colten Did: 
+What Colten Did: Colten implemented dialogue, the target move system and particles, and NPC animations and mechanics.
 
 What Jauss Did:
 Jauss worked tirelessly on the terrain, learning that Unity's terrain tools are outdated and incompatible with shader graphs, and resolved to create her own terrain, dynamically, aiming to impliment as many of the resolution features of the built in tools herself. She then worked on the shaders, making the terrain look somewhat presentable as ground. 
