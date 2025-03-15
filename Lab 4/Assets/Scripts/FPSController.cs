@@ -90,52 +90,68 @@ public class FPSController : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E)) // Pick up rock (if not holding one)
+    {
+        if (!isHoldingRock) // Only allow picking up if not holding a rock
         {
-            Debug.Log("e was pressed!");
+            Debug.Log("E was pressed for picking up!");
             interact();
         }
     }
-    void interact()
+
+    if (Input.GetKeyDown(KeyCode.R)) // Throw rock (if holding one)
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionRange))
+        if (isHoldingRock) // Only allow throwing if holding a rock
         {
-            Debug.Log("raycast: " + hit.collider.gameObject.name);
-            RockInteract rock = hit.collider.GetComponent<RockInteract>();
-            if (rock != null)
-            {
-                currentRock = rock;
-
-                Debug.Log("Rock in range!");
-
-                if (true)
-                {
-                    if (isHoldingRock)
-                    {
-                        Vector3 throwDirection = playerCamera.transform.forward;
-                        currentRock.Throw(throwDirection);
-                        isHoldingRock = false;
-                        throwSource.Play();
-                    }
-                    else
-                    {
-                        currentRock.PickUp(playerCamera.transform);
-                        isHoldingRock = true;
-                        pickupSource.Play();
-                    }
-                }
-            }
-        }
-        else
-        {
-            currentRock = null;
-        }
-
-        if (isHoldingRock && currentRock != null)
-        {
-            currentRock.UpdateHeldPosition(playerCamera.transform.position, playerCamera.transform.rotation);
+            Debug.Log("R was pressed for throwing!");
+            ThrowRock();
         }
     }
+}
+
+void interact()
+{
+    RaycastHit hit;
+
+    if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionRange))
+    {
+        Debug.Log("raycast: " + hit.collider.gameObject.name);
+        RockInteract rock = hit.collider.GetComponent<RockInteract>();
+
+        if (rock != null)
+        {
+            currentRock = rock;
+            Debug.Log("Rock in range!");
+
+            // If we're not holding a rock, pick it up
+            if (!isHoldingRock)
+            {
+                currentRock.PickUp(playerCamera.transform);
+                isHoldingRock = true;
+                pickupSource.Play();
+            }
+        }
+    }
+    else
+    {
+        currentRock = null;
+    }
+
+    // If holding the rock, update its position relative to the player
+    if (isHoldingRock && currentRock != null)
+    {
+        currentRock.UpdateHeldPosition(playerCamera.transform.position, playerCamera.transform.rotation);
+    }
+}
+
+void ThrowRock()
+{
+    if (currentRock != null)
+    {
+        Vector3 throwDirection = playerCamera.transform.forward;
+        currentRock.Throw(throwDirection);
+        isHoldingRock = false;
+        throwSource.Play();
+    }
+}
 }

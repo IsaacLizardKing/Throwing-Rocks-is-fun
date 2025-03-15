@@ -2185,17 +2185,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Controls:
-
-
-    "WASD" to move
-
-
-    "E" to pick up and throw rocks
-
-
-    "Space"
-    to advance text'
+  m_text: "Controls:\n\n\"WASD\" to move\n\n\"E\" to pick up \n\"R\" to throw rocks\n\n\"Space\"
+    to advance text"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c136498947f8930dc89456988223afff, type: 2}
   m_sharedMaterial: {fileID: -1340265236807455255, guid: c136498947f8930dc89456988223afff, type: 2}
