@@ -1,11 +1,11 @@
 # Throwing-Rocks-is-fun
 Game Name: Throwing Rocks is Fun
 
-Intent: 
+Intent: To create a simple game about throwing rocks. Narrative is progressed with the help of the only other person in the world, Karen. Karen was initially imagined to be a heckler, but now serves as a protector for the limited number of rocks on the plane that you've been thrown onto.
 
-Narrative Structure: 
+Narrative Structure: You play as a boy thrown into a empty world with one other person named Karen. You are given nothing to do except to interact with the rocks around you and throw them at targets moving across the sky in front of you. You learn as you progress that, for some unknown reason, Karen minds very much that you are throwing all her rocks. 
 
-Mechanics: Move with "WASD" or the arrow keys. Interact with rocks using "E."
+Mechanics: Move with "WASD" or the arrow keys. Pick up the rocks using "E." Throw the rocks using "R." And advance the dialgue using "Space."
 
 Aesthetics: Meant to be a calm, semi-monotonous game.
 
