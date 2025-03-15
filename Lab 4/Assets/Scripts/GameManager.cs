@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
     int Score = 0;
     public TextMeshProUGUI ScoreText;
 
-    public void IncScore(int ds) {
+    public void IncScore(int ds)
+    {
         Score += ds;
         ScoreText.text = "Score: " + Score;
     }
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager move to spot");
         npc.GetComponent<NPCMove>().moveToSpot(player.transform);
+        Debug.Log(player.transform.position.x);
     }
     public GameObject target;
     public void targetHit(GameObject target)

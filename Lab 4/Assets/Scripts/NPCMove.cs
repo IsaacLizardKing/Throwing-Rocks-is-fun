@@ -39,6 +39,7 @@ public class NPCMove : MonoBehaviour
 
     public void moveToSpot(Transform position)
     {
+
         turnTowardsPlayer(position);
         isMoving = true;
         goalPosition = position;
@@ -46,6 +47,7 @@ public class NPCMove : MonoBehaviour
     }
     public void turnTowardsPlayer(Transform playerTransform)
     {
+        Debug.Log("turn towards player");
         Vector3 rot = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
         rot.x = rot.z = 0;
         transform.rotation = Quaternion.Euler(rot);

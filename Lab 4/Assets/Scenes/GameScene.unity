@@ -4179,6 +4179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 169477e97166ea34c83dc6bbeb7c1c5b, type: 3}
+--- !u!1 &1365656288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d50089ee26360634190b2b035f6d5fff, type: 3}
+  m_PrefabInstance: {fileID: 1341059267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1391995516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4919,8 +4924,8 @@ MonoBehaviour:
   dialogueText: {fileID: 422584294}
   nameText: {fileID: 532630840}
   dialoguePanel: {fileID: 1189558386}
-  npc: {fileID: 7943989671185568277, guid: 0eba46e4976e3314c96025068257cbef, type: 3}
-  player: {fileID: 1674813120405534788, guid: e6ba91f4c005608419bcb71a17671de8, type: 3}
+  npc: {fileID: 336950741}
+  player: {fileID: 1365656288}
   ScoreText: {fileID: 967362652}
   target: {fileID: 1500128240299428844, guid: 90338f59a8fe87649abf6beeb16d8ae3, type: 3}
 --- !u!1 &1738304996
@@ -5652,7 +5657,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3dd1d3dc75bbd4c4db8d932bfb47880d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.2386317
+      value: -8.76
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3dd1d3dc75bbd4c4db8d932bfb47880d, type: 3}
       propertyPath: m_LocalPosition.y

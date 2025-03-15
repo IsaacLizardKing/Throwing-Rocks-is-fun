@@ -26,13 +26,13 @@ public class TargetMovement : MonoBehaviour
 
 
         transform.position = Vector3.MoveTowards(transform.position, newYPos, speed * Time.deltaTime);
-        if (transform.position.x > 20)
+        if (transform.position.x > 12)
         {
-            transform.position = new Vector3(-20, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-11, transform.position.y, transform.position.z);
         }
-        if (transform.position.x < -20)
+        if (transform.position.x < -12)
         {
-            transform.position = new Vector3(20, transform.position.y, transform.position.z);
+            transform.position = new Vector3(11, transform.position.y, transform.position.z);
 
         }
     }
