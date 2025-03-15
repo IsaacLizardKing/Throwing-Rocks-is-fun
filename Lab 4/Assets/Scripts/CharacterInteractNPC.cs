@@ -30,7 +30,7 @@ public class CharacterInteractNPC : MonoBehaviour
             GameManager.Instance.moveNPCtoSpot();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Player Interact E was pressed");
             Interact();
